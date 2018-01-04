@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondScreen"></activity>
+        <activity android:name=".ListAdapterActivity"></activity>
         <activity android:name=".ListViewActivity"></activity>
     </application>
 

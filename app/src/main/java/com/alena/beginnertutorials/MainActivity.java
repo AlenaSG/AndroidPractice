@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started");
         Button firstButton = (Button) findViewById(R.id.btnOne);
-        Button btnNavToSecond = (Button) findViewById(R.id.btnGoToSecondScreen);
+        Button btnNavToSecond = (Button) findViewById(R.id.btnGo);
         ImageView firstImage = (ImageView) findViewById(R.id.firstImage);
+        Button btnToListAdapter = (Button) findViewById(R.id.btnGoToListAdapter);
 
         int imageResource = getResources().getIdentifier("@drawable/sunsetpic", null, this.getPackageName());
         firstImage.setImageResource(imageResource);
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondScreen.class);
                 startActivity(intent);
+            }
+        });
+
+        btnToListAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentT = new Intent(MainActivity.this, ListAdapterActivity.class);
+                startActivity(intentT);
             }
         });
 
