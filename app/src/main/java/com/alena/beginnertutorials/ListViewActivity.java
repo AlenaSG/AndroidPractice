@@ -30,7 +30,10 @@ public class ListViewActivity extends AppCompatActivity {
         names.add("Mick");
         names.add("Saul");
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+//using different layouts
+       // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+       // list.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item_layout, names);
         list.setAdapter(adapter);
     }
 }
