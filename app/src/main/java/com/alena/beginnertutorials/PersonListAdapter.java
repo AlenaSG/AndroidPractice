@@ -10,7 +10,15 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +35,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
         TextView name;
         TextView birthday;
         TextView sex;
+        ImageView img;
     }
 
     //default constructor for the PersonListAdapter
@@ -39,13 +48,14 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //set up the image loader
+        setUpImageLoader();
+
         //get the person info
         String name = getItem(position).getName();
         String birthday = getItem(position).getBirthday();
         String sex = getItem(position).getSex();
-
-        //Create the person object with the info
-        Person person = new Person(name,birthday,sex);
+        String imgURL = getItem(position).getImgURL();
 
         //Create the view result for showing the animation
         final View result;
@@ -55,7 +65,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
 
         //store some objects head of time
         //if this position hasn't been visited yet
-        if(convertView ==null){
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
 
@@ -64,12 +74,13 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
             holder.name = (TextView) convertView.findViewById(R.id.textView1);
             holder.birthday = (TextView) convertView.findViewById(R.id.textView2);
             holder.sex = (TextView) convertView.findViewById(R.id.textView3);
+            //initialize image view
+            holder.img = (ImageView) convertView.findViewById(R.id.image);
 
             result = convertView;
             //the view will be stored in memory - setTag
             convertView.setTag(holder);
-        }
-        else{
+        } else {
             //the view will be referenced from memory - getTag
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
@@ -77,15 +88,46 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
 
 
         Animation animation = AnimationUtils.loadAnimation(mContext,
-                (position > lastPosition)? R.anim.load_down_anim : R.anim.load_up_anim);
+                (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
         result.startAnimation(animation);
         lastPosition = position;
 
-        holder.name.setText(person.getName());
-        holder.birthday.setText(person.getBirthday());
-        holder.sex.setText(person.getSex());
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        int defaultImage = mContext.getResources().getIdentifier("@drawable/image_failed", null, mContext.getPackageName());
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
+                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .showImageForEmptyUri(defaultImage)
+                .showImageOnFail(defaultImage)
+                .showImageOnLoading(defaultImage).build();
+
+       // holder.img = (ImageView) convertView.findViewById(R.id.image);//initialized up there
+
+        imageLoader.displayImage(imgURL, holder.img, options);
+
+        holder.name.setText(name);
+        holder.birthday.setText(birthday);
+        holder.sex.setText(sex);
 
         return convertView;
+    }
+
+    private void setUpImageLoader() {
+        // UNIVERSAL IMAGE LOADER SETUP
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheOnDisc(true).cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                mContext)
+                .defaultDisplayImageOptions(defaultOptions)
+                .memoryCache(new WeakMemoryCache())
+                .discCacheSize(100 * 1024 * 1024).build();
+
+        ImageLoader.getInstance().init(config);
+        // END - UNIVERSAL IMAGE LOADER SETUP
     }
 }
 

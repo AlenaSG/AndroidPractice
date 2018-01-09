@@ -8,11 +8,22 @@ public class Person {
     private String name;
     private String birthday;
     private String sex;
+    private String imgURL;
 
-    public Person(String name, String birthday, String sex) {
+
+    public Person(String name, String birthday, String sex, String imgURL) {
         this.name = name;
         this.birthday = birthday;
         this.sex = sex;
+        this.imgURL = imgURL;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public String getName() {
