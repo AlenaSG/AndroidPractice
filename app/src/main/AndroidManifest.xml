@@ -19,6 +19,8 @@
         <activity android:name=".SecondScreen"></activity>
         <activity android:name=".ListAdapterActivity"></activity>
         <activity android:name=".ListViewActivity"></activity>
+        <activity android:name=".YouTubePlayer"></activity>
+        <activity android:name=".GraphActivity"></activity>
     </application>
 
 </manifest>

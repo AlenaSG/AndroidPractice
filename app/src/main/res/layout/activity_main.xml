@@ -15,7 +15,7 @@
         android:id="@+id/btnOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="First Button-List"
+        android:text="First list with search"
         android:layout_marginTop="13dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true" />
@@ -24,7 +24,7 @@
         android:id="@+id/btnGo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Second Button-second screen"
+        android:text="Screen with ScrollView"
         android:layout_below="@+id/btnOne"
         android:layout_alignParentStart="true" />
 
@@ -44,5 +44,21 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="52dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnGoToYouTube"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView"
+        android:text="Go To YouTube"/>
+
+    <Button
+        android:id="@+id/btnGoToGraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnGoToListAdapter"
+        android:layout_centerHorizontal="true"
+        android:text="Graph" />
+
 
 </RelativeLayout>

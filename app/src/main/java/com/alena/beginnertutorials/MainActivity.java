@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnNavToSecond = (Button) findViewById(R.id.btnGo);
         ImageView firstImage = (ImageView) findViewById(R.id.firstImage);
         Button btnToListAdapter = (Button) findViewById(R.id.btnGoToListAdapter);
+        Button btnGoToYouTubePlayer = (Button) findViewById(R.id.btnGoToYouTube);
+        Button btnGoToGraph = (Button) findViewById(R.id.btnGoToGraph);
 
         int imageResource = getResources().getIdentifier("@drawable/sunsetpic", null, this.getPackageName());
         firstImage.setImageResource(imageResource);
@@ -48,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentT = new Intent(MainActivity.this, ListAdapterActivity.class);
                 startActivity(intentT);
+            }
+        });
+
+        btnGoToYouTubePlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentS = new Intent(MainActivity.this, YouTubePlayer.class);
+                startActivity(intentS);
+            }
+        });
+
+        btnGoToGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentG = new Intent(MainActivity.this, GraphActivity.class);
+                startActivity(intentG);
             }
         });
 
