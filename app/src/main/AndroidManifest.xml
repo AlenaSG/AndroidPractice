@@ -21,6 +21,7 @@
         <activity android:name=".ListViewActivity"></activity>
         <activity android:name=".YouTubePlayer"></activity>
         <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".ClickedNameActivity"></activity>
     </application>
 
 </manifest>

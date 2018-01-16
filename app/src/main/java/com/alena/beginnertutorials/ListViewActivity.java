@@ -1,5 +1,6 @@
 package com.alena.beginnertutorials;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,10 @@ public class ListViewActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d(TAG, "onItemClick: name: " + names.get(i));
                 Toast.makeText(ListViewActivity.this, "You clicked on: " + names.get(i), Toast.LENGTH_SHORT).show();
+                //passing data to another activity
+                Intent intent = new Intent(ListViewActivity.this, ClickedNameActivity.class);
+                intent.putExtra("name", names.get(i));
+                startActivity(intent);
             }
         });
 
